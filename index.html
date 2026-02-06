@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zabina Graphics — Digital Designer & Web Developer</title>
+  <meta name="description" content= "Zabina — Graphic Designer & Digital Creator" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ===== EXACT MIDNIGHT BLUE PALETTE ===== */
+    :root {
+      /* Your exact colors */
+      --midnight-blue: #355666;
+      --deep-blue: #1C4C63;
+      --light-blue: #BCD1E6;
+      --dark-blue: #12171E;
+      
+      /* Light Theme using exact palette */
+      --primary: #355666;        /* midnight-blue */
+      --primary-dark: #1C4C63;   /* deep-blue */
+      --primary-light: #BCD1E6;  /* light-blue */
+      --bg-primary: #BCD1E6;     /* light-blue as background */
+      --bg-secondary: #E8EFF7;
+      --text-primary: #12171E;   /* dark-blue as text */
+      --text-secondary: #355666; /* midnight-blue as secondary text */
+      --text-muted: #1C4C63;     /* deep-blue as muted */
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-glass: rgba(255, 255, 255, 0.2);
+      --border-light: rgba(53, 86, 102, 0.15);
+      --border-medium: rgba(53, 86, 102, 0.25);
+      --shadow-sm: 0 2px 12px rgba(18, 23, 30, 0.08);
+      --shadow-md: 0 8px 30px rgba(18, 23, 30, 0.12);
+      --shadow-lg: 0 15px 40px rgba(18, 23, 30, 0.15);
+      --shadow-xl: 0 25px 60px rgba(18, 23, 30, 0.2);
+      --shadow-primary: 0 8px 25px rgba(53, 86, 102, 0.2);
+      
+      /* Glass Physics for Light Theme - Using only your colors */
+      --glass-bg-light: rgba(188, 209, 230, 0.1);
+      --glass-border-light: rgba(53, 86, 102, 0.15);
+      --glass-highlight-light: rgba(53, 86, 102, 0.2);
+      --glass-shadow-light: 0 8px 32px rgba(53, 86, 102, 0.1);
+      --glass-blur: blur(20px);
+      
+      /* Gradients using only your colors */
+      --gradient-primary: linear-gradient(135deg, #355666 0%, #1C4C63 50%, #12171E 100%);
+      --gradient-light: linear-gradient(135deg, #BCD1E6 0%, #E8EFF7 100%);
+      --gradient-bg: linear-gradient(135deg, rgba(188, 209, 230, 0.8) 0%, rgba(232, 239, 247, 0.9) 100%);
+      --gradient-accent: linear-gradient(135deg, #355666 0%, #1C4C63 100%);
+      
+      /* Transitions from File 2 */
+      --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    /* ===== DARK THEME using exact palette ===== */
+    [data-theme="dark"] {
+      --primary: #BCD1E6;        /* light-blue becomes primary in dark */
+      --primary-dark: #355666;   /* midnight-blue becomes dark */
+      --primary-light: #1C4C63;  /* deep-blue becomes light */
+      --bg-primary: #12171E;     /* dark-blue as background */
+      --bg-secondary: #1A232E;
+      --text-primary: #BCD1E6;   /* light-blue as text */
+      --text-secondary: #E8EFF7;
+      --text-muted: #94A8C2;
+      --bg-card: rgba(28, 76, 99, 0.15);
+      --bg-glass: rgba(53, 86, 102, 0.1);
+      --border-light: rgba(188, 209, 230, 0.1);
+      --border-medium: rgba(188, 209, 230, 0.2);
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 25px 60px rgba(0, 0, 0, 0.6);
+      --shadow-primary: 0 8px 25px rgba(53, 86, 102, 0.3);
+      
+      /* Glass Physics for Dark Theme - Using only your colors */
+      --glass-bg-dark: rgba(18, 23, 30, 0.3);
+      --glass-border-dark: rgba(188, 209, 230, 0.1);
+      --glass-highlight-dark: rgba(188, 209, 230, 0.15);
+      --glass-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.4);
+      
+      --gradient-bg: linear-gradient(135deg, #12171E 0%, #0E141B 100%);
+      --gradient-accent: linear-gradient(135deg, #1C4C63 0%, #355666 100%);
+    }
+
+    /* ===== REAL-TIME LIQUID GLASS PHYSICS ENGINE (EXACT FROM FILE 2) ===== */
+    .liquid-universe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .physics-blob {
+      position: absolute;
+      border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border-light);
+      box-shadow: 
+        inset 0 0 50px rgba(255, 255, 255, 0.1),
+        var(--glass-shadow-light);
+      filter: brightness(1.2) contrast(1.1);
+      opacity: 0.8;
+      animation: liquidPhysics 25s infinite ease-in-out;
+      will-change: transform, border-radius, background, box-shadow;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] .physics-blob {
+      border: 1px solid var(--glass-border-dark);
+      box-shadow: 
+        inset 0 0 50px rgba(0, 0, 0, 0.2),
+        var(--glass-shadow-dark);
+      background: var(--glass-bg-dark);
+    }
+
+    /* Quantum Blobs with different properties - ADAPTED TO YOUR COLORS */
+    .quantum-blob-1 {
+      width: 400px;
+      height: 400px;
+      top: 10%;
+      right: 5%;
+      background: linear-gradient(135deg, 
+        rgba(53, 86, 102, 0.15) 0%, 
+        rgba(28, 76, 99, 0.2) 30%,
+        rgba(188, 209, 230, 0.1) 70%,
+        transparent 100%);
+      animation-delay: 0s;
+      animation-duration: 30s;
+    }
+
+    .quantum-blob-2 {
+      width: 350px;
+      height: 350px;
+      bottom: 20%;
+      left: 10%;
+      background: linear-gradient(45deg, 
+        rgba(28, 76, 99, 0.15) 0%,
+        rgba(53, 86, 102, 0.2) 40%,
+        rgba(188, 209, 230, 0.1) 80%,
+        transparent 100%);
+      animation-delay: 5s;
+      animation-duration: 35s;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    .quantum-blob-3 {
+      width: 450px;
+      height: 450px;
+      top: 50%;
+      right: 15%;
+      background: linear-gradient(225deg, 
+        rgba(188, 209, 230, 0.1) 0%,
+        rgba(53, 86, 102, 0.25) 50%,
+        rgba(18, 23, 30, 0.15) 100%);
+      animation-delay: 10s;
+      animation-duration: 40s;
+      border-radius: 30% 70% 50% 50% / 50% 50% 70% 30%;
+    }
+
+    .quantum-blob-4 {
+      width: 280px;
+      height: 280px;
+      bottom: 10%;
+      right: 20%;
+      background: linear-gradient(315deg, 
+        rgba(188, 209, 230, 0.2) 0%,
+        rgba(53, 86, 102, 0.3) 60%,
+        transparent 100%);
+      animation-delay: 15s;
+      animation-duration: 28s;
+      border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+    }
+
+    .quantum-blob-5 {
+      width: 320px;
+      height: 320px;
+      top: 30%;
+      left: 15%;
+      background: linear-gradient(135deg, 
+        rgba(28, 76, 99, 0.25) 0%,
+        rgba(53, 86, 102, 0.2) 40%,
+        rgba(188, 209, 230, 0.15) 80%,
+        transparent 100%);
+      animation-delay: 8s;
+      animation-duration: 32s;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    /* Advanced Liquid Physics Animation (EXACT FROM FILE 2) */
+    @keyframes liquidPhysics {
+      0%, 100% { 
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+        filter: brightness(1.2) contrast(1.1);
+      }
+      20% { 
+        transform: translate(60px, -70px) scale(1.15) rotate(90deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        filter: brightness(1.4) contrast(1.2);
+      }
+      40% { 
+        transform: translate(-40px, 50px) scale(0.95) rotate(180deg);
+        border-radius: 30% 70% 50% 50% / 50% 50% 70% 30%;
+        filter: brightness(1.1) contrast(1.05);
+      }
+      60% { 
+        transform: translate(80px, 30px) scale(1.1) rotate(270deg);
+        border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+        filter: brightness(1.3) contrast(1.15);
+      }
+      80% { 
+        transform: translate(-30px, -60px) scale(1.05) rotate(360deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        filter: brightness(1.25) contrast(1.1);
+      }
+    }
+
+    /* Quantum Pulse Effect (EXACT FROM FILE 2) */
+    .physics-blob::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 90%;
+      border-radius: inherit;
+      background: radial-gradient(circle at center,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        transparent 70%);
+      animation: quantumPulse 10s infinite ease-in-out;
+      mix-blend-mode: overlay;
+    }
+
+    @keyframes quantumPulse {
+      0%, 100% { 
+        opacity: 0.3; 
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0px);
+      }
+      50% { 
+        opacity: 0.7; 
+        transform: translate(-50%, -50%) scale(1.2);
+        filter: blur(10px);
+      }
+    }
+
+    /* Liquid Trail Effect (EXACT FROM FILE 2) */
+    .physics-blob::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      background: linear-gradient(45deg, 
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%);
+      animation: liquidTrail 15s infinite linear;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes liquidTrail {
+      0% { transform: translateX(-100%) translateY(-100%); }
+      100% { transform: translateX(100%) translateY(100%); }
+    }
+
+    /* ===== CYBER GRID OVERLAY (EXACT FROM FILE 2) ===== */
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -9;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(53, 86, 102, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(53, 86, 102, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridFlow 20s linear infinite;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+    }
+
+    [data-theme="dark"] .cyber-grid {
+      background-image: 
+        linear-gradient(rgba(188, 209, 230, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 209, 230, 0.03) 1px, transparent 1px);
+    }
+
+    @keyframes gridFlow {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    /* ===== HYPER-REAL GLASS CARDS (FROM FILE 2) ===== */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 24px;
+      border: 1px solid var(--border-light);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-bounce);
+      box-shadow: 
+        inset 0 0 100px var(--glass-bg-light),
+        0 20px 40px var(--glass-shadow-light);
+    }
+
+    [data-theme="dark"] .glass-card {
+      box-shadow: 
+        inset 0 0 100px var(--glass-bg-dark),
+        0 20px 40px var(--glass-shadow-dark);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary),
+        transparent);
+      animation: scanLine 3s linear infinite;
+    }
+
+    @keyframes scanLine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 
+        inset 0 0 200px rgba(53, 86, 102, 0.1),
+        0 30px 60px var(--glass-shadow-light);
+    }
+
+    [data-theme="dark"] .glass-card:hover {
+      box-shadow: 
+        inset 0 0 200px rgba(188, 209, 230, 0.1),
+        0 30px 60px var(--glass-shadow-dark);
+    }
+
+    /* ===== HOLOGRAPHIC PROJECT CARDS (FROM FILE 2) ===== */
+    .hologram-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 350px;
+      transform-style: preserve-3d;
+      transition: all var(--transition-bounce);
+      border: 1px solid var(--border-light);
+    }
+
+    .hologram-card:hover {
+      transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 
+        0 40px 80px var(--glass-shadow-light),
+        0 0 50px rgba(53, 86, 102, 0.2);
+    }
+
+    [data-theme="dark"] .hologram-card:hover {
+      box-shadow: 
+        0 40px 80px var(--glass-shadow-dark),
+        0 0 50px rgba(188, 209, 230, 0.2);
+    }
+
+    .hologram-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg,
+        transparent 0%,
+        rgba(53, 86, 102, 0.1) 50%,
+        transparent 100%);
+      mix-blend-mode: overlay;
+      animation: hologramScan 3s linear infinite;
+    }
+
+    @keyframes hologramScan {
+      0% { transform: translateY(-100%) translateX(-100%); }
+      100% { transform: translateY(100%) translateX(100%); }
+    }
+
+    /* ===== INTERACTIVE NEON BUTTONS (FROM FILE 2 - ADAPTED) ===== */
+    .cyber-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all var(--transition-bounce);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      background: var(--gradient-accent);
+      color: white;
+      letter-spacing: 1px;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .cyber-btn::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, 
+        #355666, #1C4C63, #BCD1E6, #355666);
+      border-radius: 14px;
+      z-index: -1;
+      animation: borderSpin 3s linear infinite;
+      background-size: 400% 400%;
+    }
+
+    @keyframes borderSpin {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .cyber-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+      transition: left 0.7s ease;
+    }
+
+    .cyber-btn:hover::after {
+      left: 100%;
+    }
+
+    .cyber-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(53, 86, 102, 0.6);
+    }
+
+    /* ===== NEON SKILL BARS (FROM FILE 2) ===== */
+    .skill-progress {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(28, 76, 99, 0.3);
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--gradient-accent);
+      width: 0;
+      transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 0 20px rgba(53, 86, 102, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      animation: skillGlow 2s infinite alternate;
+    }
+
+    @keyframes skillGlow {
+      0% { box-shadow: 0 0 20px rgba(53, 86, 102, 0.5); }
+      100% { box-shadow: 0 0 30px rgba(53, 86, 102, 0.8); }
+    }
+
+    /* ===== BASE STYLES FROM FILE 1 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color var(--transition-base), color var(--transition-base);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ===== TYPOGRAPHY FROM FILE 1 ===== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+      transform-origin: left;
+      animation: lineGrow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: 0.5s;
+      opacity: 0;
+    }
+
+    @keyframes lineGrow {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 1.8rem);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+
+    /* ===== LAYOUT & CONTAINERS FROM FILE 1 ===== */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    main {
+      padding-top: 80px;
+    }
+
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* ===== NAVIGATION FROM FILE 1 (Enhanced with glass) ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: all var(--transition-base);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    [data-theme="dark"] header {
+      background-color:rgba(18, 23, 30, 0.7);
+    }
+
+    header.scrolled {
+      padding: 15px 0;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(25px) saturate(200%);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--gradient-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: transform var(--transition-base);
+      box-shadow: 0 0 20px rgba(53, 86, 102, 0.3);
+    }
+    /* ===== LOGO IMAGE STYLES ===== */
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit; /* Inherits from .logo-icon */
+  transition: transform var(--transition-base);
+}
+
+.logo:hover .logo-image {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* For theme compatibility */
+[data-theme="dark"] .logo-image {
+  filter: brightness(1.1) contrast(1.05);
+}
+
+    .logo:hover .logo-icon {
+      transform: rotate(10deg) scale(1.05);
+      box-shadow: 0 0 30px rgba(53, 86, 102, 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      padding: 8px 0;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+      font-size: 0.95rem;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+      transition: width var(--transition-base);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      cursor: pointer;
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      transition: all var(--transition-bounce);
+      backdrop-filter: blur(10px);
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(15deg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      backdrop-filter: blur(10px);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all var(--transition-base);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* ===== HERO SECTION FROM FILE 1 ===== */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .hero-title span {
+      color: var(--primary-light);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      color: var(--text-secondary);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 2rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--primary-dark);
+    }
+
+    [data-theme="dark"] .stat-number {
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Tech stack chips */
+    .tech-stack {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .tech-chip {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(53, 86, 102, 0.1);
+      border: 1px solid rgba(53, 86, 102, 0.2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+
+    [data-theme="dark"] .tech-chip {
+      background: rgba(188, 209, 230, 0.1);
+      border: 1px solid rgba(188, 209, 230, 0.2);
+    }
+
+    .tech-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(53, 86, 102, 0.2);
+    }
+
+    [data-theme="dark"] .tech-chip:hover {
+      background: rgba(188, 209, 230, 0.2);
+    }
+
+    /* ===== SKILLS GRID ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 2rem;
+    }
+
+    .skill-bar {
+      margin-top: 2rem;
+    }
+
+    .skill-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .skill-percent {
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] .skill-percent {
+      color: var(--primary);
+    }
+
+    /* ===== PROJECTS GRID ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 3rem;
+}
+
+/* ===== PROJECT CARD ===== */
+.hologram-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: 0 20px 45px rgba(94, 93, 93, 0.45);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hologram-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 35px 70px rgba(120, 140, 150, 0.5);
+}
+
+
+/* ===============================
+   PROJECTS GRID
+================================ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===============================
+   BASE PROJECT CARD
+================================ */
+
+.hologram-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  height: 260px;
+}
+
+/* ===============================
+   FEATURED CASE STUDY CARD
+================================ */
+
+.hologram-card.case-study {
+  grid-column: span 3;
+  height: 360px; /* featured height */
+  border-radius: 26px;
+}
+
+/* ===============================
+   PROJECT IMAGE
+================================ */
+
+.project-image {
+  position:fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.9s ease, filter 0.6s ease;
+  filter: grayscale(15%) brightness(0.88);
+  will-change: transform;
+}
+
+.hologram-card:hover .project-image {
+  transform: scale(1.06);
+  filter: grayscale(0%) brightness(1);
+}
+
+/* ===============================
+   PROJECT OVERLAY
+================================ */
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(
+    to top,
+    rgba(219, 230, 248, 0.116),
+    rgba(219, 229, 248, 0.014)
+  );
+  color: #ffffff;
+  pointer-events: none;
+}
+
+/* ===============================
+   PROJECT TITLE
+================================ */
+
+.project-overlay h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ===============================
+   PROJECT DESCRIPTION
+================================ */
+
+.project-overlay p {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  max-width: 70%;
+}
+
+/* ===============================
+   PROJECT TAGS
+================================ */
+
+.project-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-tag {
+  background: rgba(53, 86, 102, 0.85);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(53, 86, 102, 0.35);
+}
+
+/* ===============================
+   TABLET RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hologram-card {
+    height: 250px;
+  }
+
+  .hologram-card.case-study {
+    grid-column: span 2;
+    height: 330px;
+  }
+
+  .project-overlay {
+    padding: 28px;
+  }
+
+  .project-overlay h3 {
+    font-size: 1.25rem;
+  }
+
+  .project-overlay p {
+    max-width: 85%;
+  }
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hologram-card {
+    height: 240px;
+  }
+
+  .hologram-card.case-study {
+    grid-column: span 1;
+    height: 280px;
+  }
+
+  .project-overlay {
+    padding: 22px;
+  }
+
+  .project-overlay h3 {
+    font-size: 1.15rem;
+  }
+
+  .project-overlay p {
+    font-size: 0.85rem;
+    max-width: 100%;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+  }
+}
+
+  /* ===== PROJECTS GRID ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 3rem;
+}
+
+/* ===== PROJECT CARD ===== */
+.hologram-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: 0 20px 45px rgba(94, 93, 93, 0.45);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hologram-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 35px 70px rgba(120, 140, 150, 0.5);
+}
+
+
+/* ===============================
+   PROJECTS GRID
+================================ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===============================
+   BASE PROJECT CARD
+================================ */
+
+.hologram-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  height: 260px;
+}
+
+/* ===============================
+   FEATURED CASE STUDY CARD
+================================ */
+
+.hologram-card.case-study {
+  grid-column: span 3;
+  height: 360px; /* featured height */
+  border-radius: 26px;
+}
+
+/* ===============================
+   PROJECT IMAGE
+================================ */
+
+.project-image {
+  position:fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.9s ease, filter 0.6s ease;
+  filter: grayscale(15%) brightness(0.88);
+  will-change: transform;
+}
+
+.hologram-card:hover .project-image {
+  transform: scale(1.06);
+  filter: grayscale(0%) brightness(1);
+}
+
+/* ===============================
+   PROJECT OVERLAY
+================================ */
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(
+    to top,
+    rgba(219, 230, 248, 0.116),
+    rgba(219, 229, 248, 0.014)
+  );
+  color: #ffffff;
+  pointer-events: none;
+}
+
+/* ===============================
+   PROJECT TITLE
+================================ */
+
+.project-overlay h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ===============================
+   PROJECT DESCRIPTION
+================================ */
+
+.project-overlay p {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  max-width: 70%;
+}
+
+/* ===============================
+   PROJECT TAGS
+================================ */
+
+.project-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-tag {
+  background: rgba(53, 86, 102, 0.85);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(53, 86, 102, 0.35);
+}
+
+/* ===============================
+   TABLET RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hologram-card {
+    height: 250px;
+  }
+
+  .hologram-card.case-study {
+    grid-column: span 2;
+    height: 330px;
+  }
+
+  .project-overlay {
+    padding: 28px;
+  }
+
+  .project-overlay h3 {
+    font-size: 1.25rem;
+  }
+
+  .project-overlay p {
+    max-width: 85%;
+  }
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hologram-card {
+    height: 240px;
+  }
+
+  .hologram-card.case-study {
+    grid-column: span 1;
+    height: 280px;
+  }
+
+  .project-overlay {
+    padding: 22px;
+  }
+
+  .project-overlay h3 {
+    font-size: 1.15rem;
+  }
+
+  .project-overlay p {
+    font-size: 0.85rem;
+    max-width: 100%;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+  }
+}
+
+
+    /* ===== TIMELINE FROM FILE 1 (Enhanced) ===== */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 3rem auto 0;
+        padding-bottom: 3rem; /* optional, for extra spacing */
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gradient-accent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 70px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 22px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gradient-accent);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 0 0 20px rgba(53, 86, 102, 0.5);
+    }
+
+    .timeline-date {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--gradient-accent);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      box-shadow: 0 0 20px rgba(53, 86, 102, 0.3);
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-accent);
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 0 20px rgba(53, 86, 102, 0.3);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      transition: all var(--transition-bounce);
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      background: var(--gradient-accent);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(53, 86, 102, 0.3);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 
+        inset 0 0 100px var(--glass-bg-light),
+        0 20px 40px var(--glass-shadow-light);
+    }
+
+    [data-theme="dark"] .contact-form {
+      box-shadow: 
+        inset 0 0 100px var(--glass-bg-dark),
+        0 20px 40px var(--glass-shadow-dark);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: rgba(53, 86, 102, 0.05);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all var(--transition-fast);
+      backdrop-filter: blur(5px);
+    }
+
+    [data-theme="dark"] .form-control {
+      background: rgba(188, 209, 230, 0.05);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(53, 86, 102, 0.1);
+      background: rgba(53, 86, 102, 0.1);
+    }
+
+    [data-theme="dark"] .form-control:focus {
+      box-shadow: 0 0 0 3px rgba(188, 209, 230, 0.1);
+      background: rgba(188, 209, 230, 0.1);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--border-light);
+      margin-top: 100px;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: var(--gradient-accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all var(--transition-bounce);
+      z-index: 999;
+      box-shadow: var(--shadow-lg), 0 0 20px rgba(53, 86, 102, 0.3);
+      border: none;
+      backdrop-filter: blur(5px);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 1024px) {
+      .nav-links {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-card);
+        backdrop-filter: blur(20px) saturate(180%);
+        flex-direction: column;
+        padding: 30px;
+        gap: 0;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-base);
+        z-index: 999;
+        border-top: 1px solid var(--border-light);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-link {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-light);
+        width: 100%;
+      }
+
+      .nav-link:last-child {
+        border-bottom: none;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+      
+      .glass-card, .contact-form {
+        padding: 24px;
+      }
+      
+      .quantum-blob-1,
+      .quantum-blob-2,
+      .quantum-blob-3,
+      .quantum-blob-4,
+      .quantum-blob-5 {
+        width: 200px;
+        height: 200px;
+        opacity: 0.5;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* ===== ANIMATION UTILITIES ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+  <!-- Advanced Liquid Glass Universe (EXACT FROM FILE 2) -->
+  <div class="liquid-universe">
+    <div class="physics-blob quantum-blob-1"></div>
+    <div class="physics-blob quantum-blob-2"></div>
+    <div class="physics-blob quantum-blob-3"></div>
+    <div class="physics-blob quantum-blob-4"></div>
+    <div class="physics-blob quantum-blob-5"></div>
+  </div>
+
+  <!-- Cyber Grid (EXACT FROM FILE 2) -->
+  <div class="cyber-grid"></div>
+
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header (From File 1 with Glass Enhancement) -->
+  <header id="header">
+    <div class="container nav-container">
+  
+<a href="#" class="logo">
+  <div class="logo-icon">
+    <img src="logo.jpg" alt="Zaib un Nisa Logo" class="logo-image">
+  </div>
+  <span>Zabina Graphics</span>
+</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a href="#contact" class="cyber-btn">Hire Me</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content (From File 1) -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content fade-in">
+          <h1 class="hero-title">Digital Designer &<br><span> Creator </span></h1>
+          <h2 class="hero-subtitle">Designing Brands People Remember!</h2>
+          <p class="hero-subtitle">Every project begins with understanding the brand’s purpose, audience, and goals.
+I combine strategy with clean, modern design to create visuals that are not only beautiful, but meaningful and effective.</p>
+          
+          <div class="tech-stack">
+            <span class="tech-chip">Branding</span>
+            <span class="tech-chip">Marketing</span>
+            <span class="tech-chip">Graphics</span>
+            <span class="tech-chip">Designing</span>
+            <span class="tech-chip">Visual Strategy</span>
+            <span class="tech-chip">Creative Concepts</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="cyber-btn">
+              <i class="fas fa-eye"></i> View Projects
+            </a>
+            <a href="#contact" class="cyber-btn" style="background: transparent; border: 2px solid var(--primary); color: var(--text-primary);">
+              <i class="fas fa-paper-plane"></i> Contact Me
+            </a>
+          </div>
+
+          <div class="hero-stats fade-in delay-2">
+            <div class="stat">
+              <div class="stat-number" data-count="10">0+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number" data-count="100">0%</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number" data-count="1">0+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="fade-in">About Me</h2>
+        <p class="fade-in delay-1">I’m Zabina, a graphic designer focused on building meaningful and memorable brand identities.
+My work blends strategy, clarity, and creativity to help brands communicate who they are — visually and confidently.
+
+I believe good design goes beyond aesthetics. It solves problems, tells stories, and creates lasting impressions. Every project I take on is approached with intention, ensuring the visuals not only look refined but also align with the brand’s purpose and audience.</p>
+        
+        <div class="skills-grid fade-in delay-2">
+          <div class="glass-card">
+            <div class="card-icon" style="width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; background: var(--gradient-accent); color: white; font-size: 1.5rem; box-shadow: 0 0 30px rgba(53, 86, 102, 0.3);">
+              <i class="fas fa-palette"></i>
+            </div>
+            <h3>Color & Typography Expertise</h3>
+            <p>Skilled in crafting harmonious color palettes and selecting typography that remains consistent and impactful across digital and print media.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="card-icon" style="width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; background: var(--gradient-accent); color: white; font-size: 1.5rem; box-shadow: 0 0 30px rgba(53, 86, 102, 0.3);">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <h3> Brand Strategy </h3>
+            <p>Creating cohesive and memorable brand identities that reflect a brand’s values and vision.
+Focused on consistency, clarity, and long-term recognition across all platforms.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="card-icon" style="width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; background: var(--gradient-accent); color: white; font-size: 1.5rem; box-shadow: 0 0 30px rgba(53, 86, 102, 0.3);">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p>Efficient workflow with attention to detail, ensuring timely delivery of high-quality work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+           
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="fade-in">Design Expertise</h2>
+    <p class="fade-in delay-1">
+      A focused set of branding and visual design skills dedicated to creating consistent, memorable, and impactful brand identities.
+    </p>
+
+    <div class="skills-grid fade-in delay-2">
+
+      <!-- Branding & Identity -->
+      <div class="glass-card">
+        <h3>Branding & Identity</h3>
+        <ul>
+          <li>Brand Identity Design</li>
+          <li>Logo Design & Visual Marks</li>
+          <li>Brand Guidelines & Consistency</li>
+          <li>Visual Storytelling</li>
+          <li>Design Systems for Brands</li>
+        </ul>
+      </div>
+
+      <!-- Design Tools -->
+      <div class="glass-card">
+        <h3>Design Tools</h3>
+        <ul>
+          <li>Adobe Photoshop</li>
+          <li>Canva (Advanced Design Systems)</li>
+          <li>Pixellab</li>
+          <li>Creative Asset Development</li>
+          <li>Social Media Visual Design</li>
+        </ul>
+      </div>
+
+      <!-- Creative & Visual Strategy -->
+      <div class="glass-card">
+        <h3>Creative & Visual Strategy</h3>
+        <ul>
+          <li>Color Psychology & Brand Palettes</li>
+          <li>Typography Pairing & Hierarchy</li>
+          <li>Visual Composition & Balance</li>
+          <li>Campaign Concepting & Layouts</li>
+          <li>Memorable & Cohesive Visual Identity</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+ <!-- Projects Section -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="fade-in"> Featured Projects</h2>
+    <p class="fade-in delay-1">Projects demonstrating Branding and Creatives Graphics</p>
+
+    <div class="projects-grid fade-in delay-2">
+      <!-- Project 1 -->
+      <div class="hologram-card">
+        <img src="Tri Fold Broucher.jpg" alt="Brand Identity Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>Themed Colored Broucher</h3>
+          
+          <div class="project-tags">
+            <span class="project-tag">Marketing</span>
+            <span class="project-tag">Graphics</span>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="hologram-card">
+        <img src="Food Flyer.jpg" alt="Biryani Broucher" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>Flyer Design</h3>
+       
+          <div class="project-tags">
+            <span class="project-tag">Trendy</span>
+           
+            <span class="project-tag">billboard Mockup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="hologram-card">
+        <img src="Nuts Packaging.jpg" alt="Packaging Design Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>Packaging Design</h3>
+          
+          <div class="project-tags">
+            <span class="project-tag">Premium</span>
+            <span class="project-tag">Packaging</span>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study Project (Full Width) -->
+      <div class="hologram-card case-study">
+        <img src="Splash Branding.jpg" alt="Print Design Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>SPLASH Branding</h3>
+
+          <div class="project-tags">
+            
+            <span class="project-tag">Color Theory</span>
+            <span class="project-tag">Typography</span>
+            <span class="project-tag">Case Study</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Projects Section -->
+
+  <div class="container">
+    
+
+
+    <div class="projects-grid fade-in delay-2">
+      <!-- Project 1 -->
+      <div class="hologram-card">
+        <img src="Scholarship flyer.jpg" alt="Brand Identity Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>Themed Colored Broucher</h3>
+         
+          <div class="project-tags">
+            <span class="project-tag"> Scholarship Ad</span>
+           
+            <span class="project-tag">Subway Mockup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="hologram-card">
+        <img src="Stride UI.jpg" alt="Biryani Broucher" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>STRIDE Landing Page</h3>
+      
+          <div class="project-tags">
+            <span class="project-tag">Website UI</span>
+            <span class="project-tag">E-commerece</span>
+        
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="hologram-card">
+        <img src="Menu.jpg" alt="Packaging Design Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>Menu Design</h3>
+          
+          <div class="project-tags">
+            <span class="project-tag">Food Menu</span>
+            <span class="project-tag">Trifold Broucher</span>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study Project (Full Width) -->
+      <div class="hologram-card case-study">
+        <img src="Veyra Branding.jpg" alt="Print Design Project" class="project-image">
+        <div class="hologram-overlay"></div>
+        <div class="project-overlay">
+          <h3>VEYRA Branding</h3>
+          <div class="project-tags">
+            <span class="project-tag">Brand Story</span>
+            <span class="project-tag">Color Pallete</span>
+            
+            <span class="project-tag">Designs Mockup</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- Experience & Education -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="fade-in">Education & Experience</h2>
+        
+        <div class="timeline fade-in delay-1">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2025 - Present</div>
+            <h3>IT Level 3 — Web Design & Development</h3>
+            <p class="timeline-meta">Vocational Training Institute</p>
+            <p>Learning modern web technologies, responsive design, and color theory application.</p>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2023 - Present</div>
+            <h3>Freelance Graphic Designer</h3>
+            <p class="timeline-meta">Self-Employed</p>
+            <p>Creating visual designs with focus on color harmony and brand consistency.</p>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 - Present</div>
+            <h3>Academic Tutor</h3>
+            <p class="timeline-meta">Private Tutoring</p>
+            <p>Teaching design principles including color theory and visual communication.</p>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2021 - 2023</div>
+            <h3>Intermediate in Pre-Medical</h3>
+            <p class="timeline-meta">Punjab Group of Colleges</p>
+            <p>Developed analytical thinking and attention to detail applicable to design work.</p>
+          </div>
+        </div>
+      </div>
+    
+
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="fade-in">Let's Connect</h2>
+        <p class="fade-in delay-1">Interested in elevating your brand ? Let's create something beautiful together.</p>
+        
+        <div class="contact-grid fade-in delay-2">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:zabinacontact@gmail.com" class="code-font">zabinacontact@gmail.com</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h4>Phone</h4>
+                <a href="tel:+92 333 6864969" class="code-font">+92 333 6864969</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-location"></i>
+              </div>
+              <div>
+                <h4>Location</h4>
+                <p class="code-font">Pakistan, Available for Remote Work</p>
+              </div>
+            </div>
+            
+            <div>
+        
+          
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" class="form-control" placeholder="Project or inquiry subject" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-control" placeholder="Tell me about your project..." required></textarea>
+              </div>
+              
+              <button type="submit" class="cyber-btn" style="width: 100%;">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+     
+      <div class="footer-logo">
+  <div class="logo-icon" style="width: 36px; height: 36px; font-size: 1rem;">
+    <img src="logo.jpg" alt="Zaib un Nisa Logo" class="logo-image">
+  </div>
+  <span>Zabina Graphics</span>
+</div>  
+        <div>
+          <p>&copy; <span id="currentYear"></span> Zabina Graphics. All rights reserved.</p>
+          <p>Designed your Brand Exculsively <br>
+          For Queries Email at zabinacontact@gmail.com </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // ===== DOM CONTENT LOADED =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current year
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      
+      // Initialize animations
+      initAnimations();
+      
+      // Initialize skill bars
+      initSkillBars();
+      
+      // Initialize counter animation
+      initCounters();
+      
+      // Initialize liquid glass mouse interaction (FROM FILE 2)
+      initMouseInteraction();
+      
+      // Initialize particle system (FROM FILE 2)
+      createParticles();
+    });
+
+    // ===== THEME TOGGLE FROM FILE 1 =====
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme or prefer-color-scheme
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      if (newTheme === 'dark') {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    });
+
+    // ===== MOBILE MENU FROM FILE 1 =====
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // ===== SCROLL EFFECTS FROM FILE 1 =====
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      
+      // Header scroll effect
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // Back to top button
+      if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+      
+      // Update active nav link
+      updateActiveNavLink();
+    });
+
+    // ===== BACK TO TOP FROM FILE 1 =====
+    document.getElementById('backToTop').addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ===== ACTIVE NAV LINK FROM FILE 1 =====
+    function updateActiveNavLink() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // ===== LIQUID GLASS MOUSE INTERACTION (FROM FILE 2) =====
+    function initMouseInteraction() {
+      const blobs = document.querySelectorAll('.physics-blob');
+      const body = document.body;
+      
+      body.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        blobs.forEach((blob, index) => {
+          // Different blobs react differently
+          const intensity = 0.05 + (index * 0.02);
+          const offsetX = (mouseX - 0.5) * 100 * intensity;
+          const offsetY = (mouseY - 0.5) * 100 * intensity;
+          
+          blob.style.transform = `
+            translate(${offsetX}px, ${offsetY}px)
+            scale(${1 + intensity * 0.5})
+          `;
+          
+          // Change glow based on mouse position
+          const glowIntensity = 0.5 + mouseX * 0.5;
+          blob.style.filter = `brightness(${1 + glowIntensity}) contrast(${1 + glowIntensity * 0.2})`;
+        });
+      });
+      
+      // Reset on mouse leave
+      body.addEventListener('mouseleave', () => {
+        blobs.forEach(blob => {
+          blob.style.transform = '';
+          blob.style.filter = '';
+        });
+      });
+    }
+
+    // ===== CREATE QUANTUM PARTICLE FIELD (FROM FILE 2) =====
+    function createParticles() {
+      const container = document.createElement('div');
+      container.className = 'particles-container';
+      container.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -8; pointer-events: none;';
+      document.body.appendChild(container);
+      
+      const particleCount = 50;
+      const colors = ['#355666', '#1C4C63', '#BCD1E6'];
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+          position: absolute;
+          width: ${Math.random() * 4 + 2}px;
+          height: ${Math.random() * 4 + 2}px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          border-radius: 50%;
+          box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+          animation: particleFloat ${Math.random() * 20 + 10}s infinite linear;
+          left: ${Math.random() * 100}vw;
+          animation-delay: ${Math.random() * 20}s;
+        `;
+        
+        // Add keyframes for particle animation
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+          @keyframes particleFloat {
+            0% {
+              transform: translateY(100vh) translateX(0) scale(0.5);
+              opacity: 0;
+            }
+            10% {
+              opacity: 1;
+            }
+            90% {
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(-100px) translateX(${Math.random() * 200 - 100}px) scale(1.5);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(styleSheet);
+        
+        container.appendChild(particle);
+      }
+    }
+
+    // ===== REAL-TIME LIQUID MORPHING (FROM FILE 2) =====
+    function morphBlobs() {
+      const blobs = document.querySelectorAll('.physics-blob');
+      
+      setInterval(() => {
+        blobs.forEach(blob => {
+          // Random morph parameters
+          const borderRadius = `
+            ${30 + Math.random() * 40}% 
+            ${30 + Math.random() * 40}% 
+            ${30 + Math.random() * 40}% 
+            ${30 + Math.random() * 40}% / 
+            ${40 + Math.random() * 40}% 
+            ${40 + Math.random() * 40}% 
+            ${40 + Math.random() * 40}% 
+            ${40 + Math.random() * 40}%
+          `;
+          
+          const scale = 0.95 + Math.random() * 0.1;
+          const rotation = Math.random() * 360;
+          
+          blob.style.borderRadius = borderRadius;
+          blob.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+        });
+      }, 3000);
+    }
+
+    // Start morphing
+    setTimeout(morphBlobs, 1000);
+
+    // ===== SCROLL ANIMATIONS =====
+    function initAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      
+      fadeElements.forEach(element => {
+        observer.observe(element);
+      });
+    }
+
+    // ===== SKILL BARS =====
+    function initSkillBars() {
+      const skillBars = document.querySelectorAll('.skill-progress-fill');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const width = entry.target.getAttribute('data-width');
+            entry.target.style.width = `${width}%`;
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+      
+      skillBars.forEach(bar => {
+        observer.observe(bar);
+      });
+    }
+
+    // ===== COUNTER ANIMATION =====
+    function initCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-count'));
+            const suffix = entry.target.textContent.replace(/\d+/g, '');
+            let count = 0;
+            const speed = 1000 / target;
+            
+            const updateCount = () => {
+              if (count < target) {
+                count++;
+                entry.target.textContent = count + suffix;
+                setTimeout(updateCount, speed);
+              }
+            };
+            
+            updateCount();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+      
+      counters.forEach(counter => {
+        observer.observe(counter);
+      });
+    }
+
+    // ===== FORM SUBMISSION =====
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+      
+      // Simulate API call
+      setTimeout(() => {
+        alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon at ${email}.`);
+        
+        this.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }, 1500);
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // ===== PARALLAX SCROLL EFFECT (FROM FILE 2) =====
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const blobs = document.querySelectorAll('.physics-blob');
+      
+      blobs.forEach((blob, index) => {
+        const speed = 0.1 + (index * 0.05);
+        const yPos = -(scrolled * speed);
+        blob.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
